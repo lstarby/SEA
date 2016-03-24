@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>大事件</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/eventCommon.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/parent.css">
+    <script src="/static/plugins/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span></span>
+                <h1>社会情绪分析</h1>
+            </div>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#">主页</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div id="banner"></div>
+    <div class="bar_chart">
+        <div class="container">
+            <div id="barChart"></div>
+            <h2>各大网站参与话题人数占比</h2>
+        </div>
+    </div>
+    <div class="pie_chart">
+        <div class="container">
+            <div class="pie">
+                <div class="contain">
+                    <div id="leftPie"></div>
+                </div>
+                <h3 class="pie_title">各大网站参与话题人数比例</h3>
+            </div>
+            <div class="pie">
+                <div class="contain">
+                    <div id="rightPie"></div>
+                </div>
+                <div class="color_state">
+                    <ul id="color">
+                    </ul>
+                </div>
+                <h3 class="pie_title">主要情绪占比（%）</h3>
+            </div>
+        </div>
+    </div>
+    <div id="sonEvent">
+        <div class="container">
+            <div class="line"></div>
+            <ul></ul>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <p>Copyright &copy;  2016 IIIP</p>
+</footer>
+<script type="text/html" id="sonEventLi">
+    <li>
+        <div class="join_num">
+            <span>{joinNum}</span>人参与话题
+            <i></i>
+        </div>
+        <div class="image"><a href="/sonEvent.html?{id}"><img src="{pic}"></a></div>
+        <div class="detail">
+            <span>时间: {dateTime}</span>
+            <h3><a href="/sonEvent.html?{id}">{title}</a></h3>
+            <p>{abstract}</p>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="bannerNews">
+    <div class="container">
+        <div class="picture"><img src="{picSrc}"></div>
+        <div class="summary">
+            <h4><span>{dateTime}</span><span><a href="#">{title}</a></span></h4>
+            <p class="describe">{abstract}</p>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="colorBar">
+    <li>
+        <span style="background-color:{color}" class="color"></span>
+        <div class="caption">
+            <span>{name}</span>
+            <strong>{data}</strong>
+        </div>
+    </li>
+</script>
+<script src="/static/js/common.js"></script>
+<script src="/static/js/newsObj.js"></script>
+<script src="/static/js/charts.js"></script>
+<script src="/static/js/renderUtil.js"></script>
+
+<script src="/static/js/parent.js"></script>
+</body>
+</html>

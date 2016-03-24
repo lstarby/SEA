@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>子事件</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/eventCommon.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/sonEvent.css">
+    <script src="/static/plugins/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span></span>
+                <h1>社会情绪分析</h1>
+            </div>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#">主页</a></li>
+                </ul>
+
+            </nav>
+        </div>
+    </header>
+    <div id="banner"></div>
+    <div class="pie_chart">
+        <div class="container">
+            <div id="pieChart"></div>
+            <h2>各大网站参与话题人数占比</h2>
+        </div>
+    </div>
+    <div class="bar_chart">
+        <div class="container">
+            <div id="barChart"></div>
+            <h2>参与话题人数时间进度</h2>
+        </div>
+    </div>
+    <div class="pie_chart pie_2">
+        <div class="container">
+            <div class="pie">
+                <div id="pieChart2"></div>
+                <div class="color_state">
+                    <ul id="color"></ul>
+                </div>
+                <h2>主要情绪占比（%）</h2>
+            </div>
+            <div class="keyword">
+                <div id="keyword">
+                </div>
+                <h2>关键词</h2>
+            </div>
+        </div>
+    </div>
+    <div id="comment">
+        <div class="container">
+            <div class="comment_num"><span>1</span>人参加评论</div>
+            <div class="content">
+                <ul></ul>
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <p>Copyright &copy;  2016 IIIP</p>
+</footer>
+<script type="text/html" id="bannerNews">
+    <div class="container">
+        <div class="picture"><img src="{picSrc}"></div>
+        <div class="summary">
+            <h4><span>{dateTime}</span><span>{title}</span><span class="parent"><a target="_blank" href="/parent.html?{parentId}">{parentNews}</a></span></h4>
+            <!--<p><span>{author}</span><span>{website}</span></p>-->
+            <p class="describe">{abstract}</p>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="colorBar">
+    <li>
+        <span style="background-color:{color}" class="color"></span>
+        <div class="caption">
+            <span>{name}</span>
+            <strong>{data}</strong>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="commentLi">
+    <li><span class="time">【{time}】</span><span>{comment}</span></li>
+</script>
+<script src="/static/js/common.js"></script>
+<script src="/static/js/newsObj.js"></script>
+<script src="/static/js/charts.js"></script>
+<script src="/static/js/renderUtil.js"></script>
+<script src="/static/js/keyword.js"></script>
+<script src="/static/js/sonEvent.js"></script>
+</body>
+</html>

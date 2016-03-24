@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link type="text/css" rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/homepage.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/unslider.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/unslider-dots.css">
+    <script src="/static/plugins/jquery-2.1.4.min.js"></script>
+    <script src="/static/plugins/unslider.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span></span>
+                <h1>社会情绪分析</h1>
+            </div>
+            <nav id="nav">
+                <ul>
+                    <li><a href="/homepage.html?navId=0">主页</a></li>
+                </ul>
+
+            </nav>
+        </div>
+    </header>
+    <div class="banner">
+        <div class="container">
+            <div id="carouse">
+                <ul></ul>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div class="container">
+            <ul></ul>
+        </div>
+    </div>
+
+</div>
+<footer id="footer">
+    <p>Copyright &copy;  2016 IIIP</p>
+</footer>
+
+<script type="text/html" id="carouseLi">
+    <li>
+        <div class="picture"><a target="_blank" href="/parent.html?{newsId}"><img src="{picSrc}"></a></div>
+        <div class="caption">
+            <h4><span>{dateTime}</span><span><a target="_blank" href="/parent.html?{newsId}">{title}</a></span></h4>
+            <p class="describe">{abstract}</p>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="newsLiOneSon">
+    <li>
+        <div class="parent_pic"><a href="parent.html?{parentId}"><img src="{parPic}"></a></div>
+        <div class="right_detail">
+            <div class="parent">
+                <h3><span>{parTime}</span><span><a href="/parent.html?{parentId}">{parTitle}</a></span></h3>
+                <p class="parent_sum">{parAbstract}</p>
+            </div>
+            <div class="sons">
+                <div class="son_event" style="margin-right: 20px;">
+                    <div class="son_pic"><a href="/sonEvent.html?{sonSecId}"><img src="{sonPicOne}"></a></div>
+                    <div class="son_right">
+                        <h4><a href="/sonEvent.html?{sonOneId}">{sonTitleOne}</a></h4>
+                        <span>{sonTimeOne}</span>
+                        <p class="son_sum">{sonAbstractOne}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="newsLi">
+    <li>
+        <div class="parent_pic"><a href="/parent.html?{parentId}"><img src="{parPic}"></a></div>
+        <div class="right_detail">
+            <div class="parent">
+                <h3><span>{parTime}</span><span><a href="/parent.html?{parentId}">{parTitle}</a></span></h3>
+                <p class="parent_sum">{parAbstract}</p>
+            </div>
+            <div class="sons">
+                <div class="son_event" style="margin-right: 20px;">
+                    <div class="son_pic"><a href="/sonEvent.html?{sonSecId}"><img src="{sonPicOne}"></a></div>
+                    <div class="son_right">
+                        <h4><a href="/sonEvent.html?{sonOneId}">{sonTitleOne}</a></h4>
+                        <span>{sonTimeOne}</span>
+                        <p class="son_sum">{sonAbstractOne}</p>
+                    </div>
+                </div>
+                <div class="son_event">
+                    <div class="son_pic"><a href="/sonEvent.html?{sonSecId}"><img src="{sonPicSec}"></a></div>
+                    <div class="son_right">
+                        <h4><a href="/sonEvent.html?{sonSecId}">{sonTitleSec}</a></h4>
+                        <span>{sonTimeSec}</span>
+                        <p class="son_sum">{sonAbstractSec}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="newsLiNoSon">
+    <li class="no-child">
+        <div class="parent_pic"><a target="_blank" href="/sonEvent.html?{parentId}"><img src="{parPic}"></a></div>
+        <div class="right_detail">
+            <div class="parent">
+                <h3><span>{parTime}</span><span><a target="_blank" href="/sonEvent.html?{parentId}">{parTitle}</a></span></h3>
+                <p class="parent_sum">{parAbstract}</p>
+            </div>
+        </div>
+    </li>
+</script>
+<script src="/static/js/common.js"></script>
+<script src="/static/js/newsObj.js"></script>
+<script src="/static/js/renderUtil.js"></script>
+<script src="/static/js/homepage.js"></script>
+
+</body>
+</html>

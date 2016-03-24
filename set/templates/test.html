@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>测试</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<span style="cursor:pointer;">点击获取json</span>
+<div style="width: 600px; height: 300px; background-color: #15ba63" id="result">
+
+</div>
+
+
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript">
+        $.ajax({
+            url:"http://polls.nat123.net/ajax_list",
+            dataType:'jsonp',
+            data:'',
+            jsonp:'callback',
+            success:function(result) {
+                for(var i in result) {
+                    alert(i+":"+result[i]);
+                }
+            },
+
+        });
+    </script>
+</body>
+</html>
