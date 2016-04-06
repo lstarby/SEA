@@ -2,77 +2,120 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
     <title>子事件</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <meta name="author" content="Cambridge data" />
+    <meta name="decription" content="社会舆情分析" />
+    <meta name="keywords" content="社会舆情分析" />
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/logo.jpg">
     <link rel="stylesheet" type="text/css" href="/static/css/common.css">
     <link rel="stylesheet" type="text/css" href="/static/css/eventCommon.css">
     <link rel="stylesheet" type="text/css" href="/static/css/sonEvent.css">
     <script src="/static/plugins/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
-    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
+    <script src="/static/js/d3.min.js"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
+    <!--[if lte IE 8]>
+    <script src="/static/plugins/PIE-css3/PIE_IE678.js"></script>
+    <script src="/static/plugins/PIE-css3/PIE_IE9.js"></script>
+    <script src="/static/plugins/js/jquery-1.12.1.min.js"></script>
+    <script src="/static/plugins/js/html5.js"></script>
+    <![endif]--> 
+    <!--[if IE 9]>
+        <script src="/static/plugins/PIE-css3/PIE_IE678.js"></script>
+        <script src="/static/plugins/PIE-css3/PIE_IE9.js"></script>
+    <![endif]-->
+    <style>
+        .link {
+            stroke: #40a8f4;
+            stroke-width: 1.0px;
+        }
+        .node circle {
+            fill: #40a8f4;
+            stroke: #3285c4;
+            stroke-width: 1.0px;
+        }
+
+        text {
+            text-anchor: middle;    /*文本居中样式  非常重要啊*/
+            font-family: "微软雅黑";
+            font-size: 20px;
+            color: #ffffff;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
 <div id="wrapper">
-    <header class="header">
+    <div class="side-bar">
+        <div class="nav-dots" id="navDots">
+            <ul>
+                <li class="current"><i></i><span>事件简介</span></li>
+                <li><i></i><span>关键词</span></li>
+                <li><i></i><span>分析参与人数</span></li>
+                <li><i></i><span>分析情感变化</span></li>
+                <li><i></i><span>查看评论</span></li>
+            </ul>
+        </div>
+    </div>
+    <header id="header">
         <div class="container">
             <div class="logo">
                 <span></span>
-                <h1>社会情绪分析</h1>
+                <h1>事件舆情分析</h1>
             </div>
             <nav id="nav">
                 <ul>
-                    <li><a href="#">主页</a></li>
+                    <li><a href="/homepage.html?navId=0">主页</a></li>
                 </ul>
-
             </nav>
         </div>
     </header>
-    <div id="banner"></div>
-    <div class="pie_chart">
-        <div class="container">
-            <div id="pieChart"></div>
-            <h2>各大网站参与话题人数占比</h2>
-        </div>
+    <div id="banner">
     </div>
-    <div class="bar_chart">
-        <div class="container">
-            <div id="barChart"></div>
-            <h2>参与话题人数时间进度</h2>
+    <div class="content">
+        <div class="chart-block key-word">
+            <div class="container" id="keyWord"></div>
         </div>
-    </div>
-    <div class="pie_chart pie_2">
-        <div class="container">
-            <div class="pie">
-                <div id="pieChart2"></div>
-                <div class="color_state">
-                    <ul id="color"></ul>
+        <div class="chart-block line-chart-time">
+            <div class="container">
+                <h2>参与话题人数时间进度</h2>
+                <div class="chart-main" id="lineChart"></div>
+
+            </div>
+        </div>
+        <div class="chart-block pie-chart">
+            <div class="container">
+                <div class="pie pie-left">
+                    <div id="pieJoin"></div>
+                    <h3>各大网站参与话题人数占比</h3>
                 </div>
-                <h2>主要情绪占比（%）</h2>
-            </div>
-            <div class="keyword">
-                <div id="keyword">
+                <div class="pie pie-right">
+                    <div id="pieEmotion"></div>
+                    <h3>各大网站参与话题人数占比</h3>
                 </div>
-                <h2>关键词</h2>
             </div>
         </div>
-    </div>
-    <div id="comment">
-        <div class="container">
-            <div class="comment_num"><span>1</span>人参加评论</div>
-            <div class="content">
-                <ul></ul>
+        <div id="comment">
+            <div class="container">
+                <div class="comment_num"><span>1</span>人参加评论</div>
+                <div class="com-content">
+                    <ul></ul>
+                </div>
             </div>
         </div>
+        <footer id="footer">
+            <p>&copy; 2016 广东外语外贸大学 智能信息处理研究所 保留所有权利  <a href="#">关于我们</a></p>
+        </footer>
     </div>
-</div>
-<footer id="footer">
-    <p>Copyright &copy;  2016 IIIP</p>
-</footer>
+
+    </div>
+
 <script type="text/html" id="bannerNews">
     <div class="container">
         <div class="picture"><img src="{picSrc}"></div>
         <div class="summary">
-            <h4><span>{dateTime}</span><span>{title}</span><span class="parent"><a target="_blank" href="/parent.html?{parentId}">{parentNews}</a></span></h4>
+            <h4><span>{dateTime}</span><span>{title}</span><span class="parent"><a target="_blank" href="/parent.html?navId={navId}&eventId={parentId}">{parentNews}</a></span></h4>
             <!--<p><span>{author}</span><span>{website}</span></p>-->
             <p class="describe">{abstract}</p>
         </div>
@@ -90,11 +133,16 @@
 <script type="text/html" id="commentLi">
     <li><span class="time">【{time}】</span><span>{comment}</span></li>
 </script>
+<script src="/static/js/keyword.js"></script>
 <script src="/static/js/common.js"></script>
+<script src="/static/js/animation.js"></script>
 <script src="/static/js/newsObj.js"></script>
 <script src="/static/js/charts.js"></script>
 <script src="/static/js/renderUtil.js"></script>
-<script src="/static/js/keyword.js"></script>
+<script src="/static/js/nav-dots.js"></script>
+
 <script src="/static/js/sonEvent.js"></script>
+
+
 </body>
 </html>
