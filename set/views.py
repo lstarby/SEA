@@ -1,5 +1,5 @@
 #coding=utf-8
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from datetime import datetime
 from .models import *
@@ -28,19 +28,19 @@ def json_response(func):
     return decorator
 
 def index(request):
-    cd={}
-    newswebsite = NewsWebsite.objects.all()
-    for nws in newswebsite:
-        news = News.objects.filter(news_website_id=nws.news_website_id)
-        conut = news.count()
-        cd[nws.news_website_id]=conut
-    # first_newsw =NewsWebsite.objects.filter(news_website_id=1)
-    # fnw = NewsWebsite.objects.get(id==1)
-    # latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    # output = ', '.join([p.name for p in first_newsw])
-    # output = output.join(fnw.name)
-    d = {'count':cd}
-    return HttpResponse(json.dumps(d), content_type='application/json')
+    # cd={}
+    # newswebsite = NewsWebsite.objects.all()
+    # for nws in newswebsite:
+    #     news = News.objects.filter(news_website_id=nws.news_website_id)
+    #     conut = news.count()
+    #     cd[nws.news_website_id]=conut
+    # # first_newsw =NewsWebsite.objects.filter(news_website_id=1)
+    # # fnw = NewsWebsite.objects.get(id==1)
+    # # latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    # # output = ', '.join([p.name for p in first_newsw])
+    # # output = output.join(fnw.name)
+    # d = {'count':cd}
+    return HttpResponseRedirect('/homepage.html/?navId=0')
     # return HttpResponse(first_newsw.name)
 
 def homepage(request):

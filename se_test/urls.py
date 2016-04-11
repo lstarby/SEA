@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 import settings
 urlpatterns = [
     # static(r'^static/(?P.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-    url(r'^$','set.views.homepage',name='index'),
+    url(r'^$','set.views.index',name='index'),
     url(r'^parent.html/','set.views.parent',name='parent'),
     url(r'^homepage.html/','set.views.homepage',name='homepage'),
     url(r'^sonEvent.html/','set.views.sonEvent',name='sonEvent'),
