@@ -56,9 +56,17 @@ def test(request):
 def getHomeNews(request):
     navId = request.GET.get('navId',0)
     data =[]
-    # eventset=Event.objects.all().order_by('-event_datetime')
-    eventset=Event.objects.all()
+    # eventset=Event.objects.all().order_by('-event_datetime')[:50]
+    # return eventset
+
+    #!!临时修改
+    # eventset=Event.objects.filter(normaleventtyperelative__normal_event_type_id=int(navId))[:50]
+    # eventset=Event.objects.get(normaleventtyperelative__normal_event_type_id=int(navId))[:50].order_by('-event_datetime')
+
+
+    # eventset=Event.objects.all()
     if(str(navId)=="0"):
+        eventset=Event.objects.all().order_by('-event_datetime')[:50]
         banner,below_banner=getHomeData(eventset)
         data.append(banner)
         data.append(below_banner)
@@ -67,7 +75,8 @@ def getHomeNews(request):
         # return HttpResponse(str(222))
 
     else:
-        eventset_sub = eventset.filter(normaleventtyperelative__normal_event_type_id=int(navId))
+        # eventset_sub = eventset.filter(normaleventtyperelative__normal_event_type_id=int(navId))
+        eventset_sub = Event.objects.filter(normaleventtyperelative__normal_event_type_id=int(navId)).order_by('-event_datetime')[:50]
         banner,below_banner=getHomeData(eventset_sub)
         data.append(banner)
         data.append(below_banner)
@@ -76,6 +85,9 @@ def getHomeNews(request):
         #     netr.event()
         return data
         # return HttpResponse(json.dumps(data,default=json_serial),content_type='application/json')
+
+
+
 
 #根据event_set得到相应的banner 和 below_banner
 def getHomeData(eventset):
@@ -234,7 +246,10 @@ def getNewssource(eventid):
         news_website_id = a['news_website_id']
         news_website_name = NewsWebsite.objects.get(news_website_id=news_website_id).name
         news_website_num = a['news_website_id__count']
-        b = float(news_website_num)*100/totalnum
+        if totalnum==0:
+            b=0
+        else:
+            b = float(news_website_num)*100/totalnum
         bi = ("%.2f" % b)
         bf = float(bi)
         news_website_dict[news_website_name]+=float(bi)
@@ -277,7 +292,10 @@ def getEmotion(eventid):
     for key,value in emotion_num_dict.items():
         emotionarray=[]
         emotionarray.append(key)
-        b = float(value)*100/totalnum
+        if totalnum==0:
+            b=float(0)
+        else:
+            b = float(value)*100/totalnum
         bi = ("%.2f" % b)
         bf = float(bi)
         emotionarray.append(bf)
