@@ -47,14 +47,24 @@ def homepage(request):
     return render(request,'homepage.html')
 def parent(request):
     return render(request,'parent.html')
+# def sonEvent(request):
+#     return render(request,'sonEvent.html')
 def sonEvent(request):
-    return render(request,'sonEvent.html')
+    eventid = request.GET.get("eventId")
+    comment_num = getCommentnumInter(eventid)
+    return render(request,'sonEvent.html',{"comment_num":comment_num})
 def test(request):
     return render(request,'test.html')
+def img(request):
+    return render(request,'img.html')
 #第一个数组是banner，第二个是下面的新闻below_banner
 @json_response
 def getHomeNews(request):
     navId = request.GET.get('navId',0)
+    page = int(request.GET.get('page',0))
+    interval = int(request.GET.get('interval',200))
+    start = page*interval
+
     data =[]
     # eventset=Event.objects.all().order_by('-event_datetime')[:50]
     # return eventset
@@ -66,7 +76,7 @@ def getHomeNews(request):
 
     # eventset=Event.objects.all()
     if(str(navId)=="0"):
-        eventset=Event.objects.all().order_by('-event_datetime')[:50]
+        eventset=Event.objects.all().order_by('-event_datetime')[start:start+interval]
         banner,below_banner=getHomeData(eventset)
         data.append(banner)
         data.append(below_banner)
@@ -76,7 +86,7 @@ def getHomeNews(request):
 
     else:
         # eventset_sub = eventset.filter(normaleventtyperelative__normal_event_type_id=int(navId))
-        eventset_sub = Event.objects.filter(normaleventtyperelative__normal_event_type_id=int(navId)).order_by('-event_datetime')[:50]
+        eventset_sub = Event.objects.filter(normaleventtyperelative__normal_event_type_id=int(navId)).order_by('-event_datetime')[start:start+interval]
         banner,below_banner=getHomeData(eventset_sub)
         data.append(banner)
         data.append(below_banner)
@@ -85,8 +95,6 @@ def getHomeNews(request):
         #     netr.event()
         return data
         # return HttpResponse(json.dumps(data,default=json_serial),content_type='application/json')
-
-
 
 
 #根据event_set得到相应的banner 和 below_banner
@@ -220,7 +228,19 @@ def getBannerAndCharts(request):
     return data
     # return HttpResponse(json.dumps(data,default=json_serial),content_type='application/json')
 #根据事件的id获取其评论数
-def getCommentnum(eventid):
+@json_response
+def getCommentnum(request):
+    eventid = request.GET.get('eventid',3)
+    totalnum=0
+    news_set = News.objects.filter(eventnewsrelative__event_id=eventid)
+    for ns in news_set:
+        news_comment_set_sub = ns.newscomment_set.all()
+        num_sub = news_comment_set_sub.count()
+        totalnum+=num_sub
+    return totalnum
+
+
+def getCommentnumInter(eventid):
     totalnum=0
     news_set = News.objects.filter(eventnewsrelative__event_id=eventid)
     for ns in news_set:

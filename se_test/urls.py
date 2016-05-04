@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^homepage.html/','set.views.homepage',name='homepage'),
     url(r'^sonEvent.html/','set.views.sonEvent',name='sonEvent'),
     url(r'^test/','set.views.test',name='test'),
+    url(r'^img/','set.views.img',name='img'),
     url(r'^ajax_dict/','set.views.ajax_dict',name='ajax_dict'),
     url(r'^ajax_list/','set.views.ajax_list',name='ajax_list'),
 

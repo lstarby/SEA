@@ -2,8 +2,8 @@
  * Created by luoxiaotong on 2016/1/19.
  */
 //var PATH = 'http://polls.nat123.net/';
-//var PATH = 'http://192.168.200.37:8000/';
-var PATH = 'http://192.168.235.12:8080/';
+var PATH = 'http://127.0.0.1:8000/';
+//var PATH = 'http://192.168.235.12:8080/';
 $(function () {
     getNavs();
 });
@@ -38,7 +38,8 @@ function getNavs(){
     getAjaxData(url, function (data) {
         //还要对返回的data做处理的
         for(var i = 0, length = data.length; i < length; i ++){
-            var txt = '<li><a href="homepage.html?navId=' + data[i].normal_event_type_id + '">' + data[i].normal_event_type_name + '</a></li>';
+            var txt = '<li><a href="/homepage.html?navId=' + data[i].normal_event_type_id + '">' + data[i].normal_event_type_name + '</a></li>';
+//            var txt = '<li><a href="homepage.html?navId=' + data[i].normal_event_type_id + '">' + data[i].normal_event_type_name + '</a></li>';
             $('#nav ul').append(txt);
         }
         navHighlight();
