@@ -1,9 +1,10 @@
 /**
  * Created by luoxiaotong on 2016/1/19.
  */
-//var PATH = 'http://polls.nat123.net/';
-var PATH = 'http://127.0.0.1:8081/';
-//var PATH = 'http://192.168.235.12:8080/';
+//var PATH = 'http://127.0.0.1:8080/';
+//var PATH = 'http://192.168.235.12:8081/';
+//var PATH = 'http://yinzishao199510.nat123.net:26292';
+var PATH = '/';
 $(function () {
     getNavs();
 });
